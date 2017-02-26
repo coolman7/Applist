@@ -101,8 +101,9 @@ public class Applist extends CordovaPlugin {
                         JSONArray  app_list = new JSONArray();
                         int cnt =0;
                         String path=getSDPath();
-                        makeRootDirectory(path+"/com.ionicframework.xxx/");
-                        makeRootDirectory(path+"/com.ionicframework.xxx/Cache/");
+                        String app_id=context.getPackageName();
+                        makeRootDirectory(path+"/"+app_id+"/");
+                        makeRootDirectory(path+"/"+app_id+"/cache/");
                         for (ApplicationInfo packageInfo : packages) 
                         {
                             if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1)
@@ -113,7 +114,7 @@ public class Applist extends CordovaPlugin {
                             {
                                     JSONObject info = new JSONObject();  
                                     info.put("name",packageInfo.loadLabel(pm));//这里获取的是应用名
-                                   String img_name =  "/com.ionicframework.xxx/Cache/"+ packageInfo.packageName +".png";//图片保存的是包名
+                                   String img_name =  "/"+app_id+"/cache/"+ packageInfo.packageName +".png";//图片保存的是包名
                                    info.put("img",path+img_name);
                                     //cheak exist  or not
                                     File  cheakfile  = new File( path + img_name );
